@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { db } from "../config";
 
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 export default class Game extends Component {
   state = {};
@@ -15,6 +15,14 @@ export default class Game extends Component {
     });
   }
   render() {
-    return <View></View>;
+    return (
+      <View>
+        {Object.keys(this.state).map(key => (
+          <Text key={key}>
+            {key}: {this.state[key]}
+          </Text>
+        ))}
+      </View>
+    );
   }
 }
