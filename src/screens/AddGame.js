@@ -8,6 +8,9 @@ import {
   Alert
 } from "react-native";
 
+import { useMachine } from "@xstate/react";
+import { stateMachine, stateService } from "../machine";
+
 import { db } from "../config";
 
 let addGame = gameId => {
@@ -18,7 +21,7 @@ let addGame = gameId => {
       let payload = {};
       payload[gameId] = {
         name: gameId,
-        state: "new"
+        state: stateMachine.initialState.value
       };
       snapshot.ref.parent.update(payload);
     }
