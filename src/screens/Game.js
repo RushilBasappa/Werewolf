@@ -8,11 +8,18 @@ import { Werewolf, Minion } from "./characters";
 import { stateMachine, stateService } from "../machine";
 
 const CharacterScreen = props => {
-  return (
-    <View>
-      <Text>{props.gameState}</Text>
-    </View>
-  );
+  const { gameState } = props;
+  let character;
+  switch (gameState) {
+    case "werewolf":
+      character = <Werewolf />;
+      break;
+    case "minion":
+      character = <Minion />;
+    default:
+      break;
+  }
+  return <View>{character}</View>;
 };
 
 export default class Game extends Component {
@@ -38,7 +45,6 @@ export default class Game extends Component {
 
   render() {
     const { state } = this.state;
-    console.log("TCL: Game -> render -> this.state.state", this.state.state);
     return (
       <View>
         <Button
@@ -57,12 +63,18 @@ export default class Game extends Component {
           title="Change to SEER"
           onPress={() => this.changeState("SEER")}
         />
-        <Button
+        {/* <Button
           title="Change to ENDACTION"
           onPress={() => this.changeState("ENDACTION")}
+        /> */}
+
+        <Button
+          title="Character Selection"
+          onPress={() => this.props.navigation.navigate("CharacterSelection")}
         />
+
         {state !== undefined ? (
-          <CharacterScreen gameState={this.state.state.nightaction} />
+          <CharacterScreen gameState={state.nightaction} />
         ) : null}
       </View>
     );

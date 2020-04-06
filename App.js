@@ -17,6 +17,7 @@ import AddGame from "./src/screens/AddGame";
 import List from "./src/screens/List";
 import Game from "./src/screens/Game";
 import SignUp from "./src/screens/SignUp";
+import CharacterSelection from "./src/screens/CharacterSelection";
 
 import { auth } from "./src/config";
 
@@ -42,7 +43,8 @@ const AppStack = createStackNavigator(
     Home,
     AddGame,
     List,
-    Game
+    Game,
+    CharacterSelection
   },
   {
     initialRouteName: "Home"

@@ -6,7 +6,7 @@ class Minion extends Component {
   render() {
     return (
       <View>
-        <Text>Minion</Text>
+        <Text>Minion Screen</Text>
       </View>
     );
   }
