@@ -1,10 +1,25 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { AppLoading } from "expo";
+import { View } from "react-native";
+import { Button, Text } from 'native-base';
 import { auth } from "../config";
 
 import { updateCharacters } from "../db/seed";
 
 export default class Home extends Component {
+  state = {
+    isReady: false
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
   SignOut = () => {
     auth
       .signOut()
@@ -17,8 +32,14 @@ export default class Home extends Component {
   };
 
   render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
     return (
       <View>
+        <Button primary onPress={() => updateCharacters()}>
+          <Text>Update Characters</Text>
+        </Button>
         <Button title="Update Characters" onPress={() => updateCharacters()} />
         <Button
           title="Add a Game"
